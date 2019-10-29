@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 internal let margin = CGFloat(8)
 internal let padding10 = CGFloat(8)
 internal let padding4 = CGFloat(4)
@@ -22,11 +20,16 @@ internal let maxWidth = CGFloat(500)
 internal let defaultInset = UIEdgeInsets.init(top: padding10, left: padding4, bottom: padding10, right: padding4)
 
 internal func topSafeMargin() -> CGFloat {
-    if UIScreen.main.bounds.size.height >= 812 {
-        return 44;
-    } else {
-        return margin;
+    if #available(iOS 11.0, *){
+        return UIWindow.mainWindow.safeAreaInsets.top
+    }else{
+        if UIScreen.main.bounds.size.height >= 812 {
+            return 44;
+        } else {
+            return margin;
+        }
     }
+    
 }
 internal func visible(_ view: UIView?) -> UIView?{
     if let v = view {
